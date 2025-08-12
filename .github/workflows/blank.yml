@@ -6,6 +6,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set env as secret
+        env:
+          REPO_SECRET: ${{ secrets.MY_REPO_SECRET }}
+          ORG_SECRET: ${{ secrets.MY_ORG_SECRET }}
         run: |
-          echo ${{ secrets.MY_REPO_SECRET }}
-          echo ${{ secrets.MY_ORG_SECRET }}
+          import os
+          print("---------- REPO SECRET ---------")
+          for q in (os.getenv("REPO_SECRET")):
+            print(q)
+
+          print("---------- ORG SECRET ---------")
+          for o in (os.getenv("ORG_SECRET")):
+            print(o)
+        shell: python
